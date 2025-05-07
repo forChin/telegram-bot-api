@@ -268,6 +268,7 @@ type BaseChat struct {
 	ChannelUsername          string
 	ReplyToMessageID         int
 	ReplyMarkup              interface{}
+	MessageThreadID          int
 	DisableNotification      bool
 	AllowSendingWithoutReply bool
 }
@@ -278,6 +279,7 @@ func (chat *BaseChat) params() (Params, error) {
 	params.AddFirstValid("chat_id", chat.ChatID, chat.ChannelUsername)
 	params.AddNonZero("reply_to_message_id", chat.ReplyToMessageID)
 	params.AddBool("disable_notification", chat.DisableNotification)
+	params.AddNonZero("message_thread_id", chat.MessageThreadID)
 	params.AddBool("allow_sending_without_reply", chat.AllowSendingWithoutReply)
 
 	err := params.AddInterface("reply_markup", chat.ReplyMarkup)
