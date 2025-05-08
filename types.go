@@ -257,6 +257,10 @@ type Chat struct {
 	//
 	// optional
 	LastName string `json:"last_name,omitempty"`
+	// IsForum is true if the supergroup chat is a forum (has topics enabled).
+	//
+	// optional
+	IsForum bool `json:"is_forum"`
 	// Photo is a chat photo
 	Photo *ChatPhoto `json:"photo"`
 	// Bio is the bio of the other party in a private chat. Returned only in
