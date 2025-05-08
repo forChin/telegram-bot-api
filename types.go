@@ -409,6 +409,10 @@ type Message struct {
 	//
 	// optional
 	MessageThreadID int `json:"message_thread_id,omitempty"`
+	// ForumTopicCreated represents the content of a service message about a new forum topic created in the chat.
+	//
+	// optional
+	ForumTopicCreated *ForumTopic `json:"forum_topic_created,omitempty"`
 	// ReplyToMessage for replies, the original message.
 	// Note that the Message object in this field will not contain further ReplyToMessage fields
 	// even if it itself is a reply;
@@ -3226,4 +3230,9 @@ type PreCheckoutQuery struct {
 	//
 	// optional
 	OrderInfo *OrderInfo `json:"order_info,omitempty"`
+}
+
+type ForumTopic struct {
+	Name      string `json:"name,omitempty"`
+	IconColor int    `json:"icon_color,omitempty"`
 }
