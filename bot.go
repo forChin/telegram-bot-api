@@ -512,13 +512,22 @@ func (bot *BotAPI) ListenForWebhookRespReqFormat(w http.ResponseWriter, r *http.
 
 // HandleUpdate parses and returns update received via webhook
 func (bot *BotAPI) HandleUpdate(r *http.Request) (*Update, error) {
+	bytes, err := io.ReadAll(r.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	if bot.Debug {
+		log.Printf("Update: %s\n", string(bytes))
+	}
+
 	if r.Method != http.MethodPost {
 		err := errors.New("wrong HTTP method required POST")
 		return nil, err
 	}
 
 	var update Update
-	err := json.NewDecoder(r.Body).Decode(&update)
+	err = json.Unmarshal(bytes, &update)
 	if err != nil {
 		return nil, err
 	}
